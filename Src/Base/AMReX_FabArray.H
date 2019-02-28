@@ -1782,6 +1782,8 @@ template <class FAB>
 void
 FabArray<FAB>::FillBoundary (bool cross)
 {
+    // Add MPI barrier in order to accurately measure FillBoundary
+    ParallelDescriptor::Barrier();
     BL_PROFILE("FabArray::FillBoundary()");
     if ( n_grow.max() > 0 ) {
 	FillBoundary_nowait(0, nComp(), n_grow, Periodicity::NonPeriodic(), cross);
@@ -1793,6 +1795,8 @@ template <class FAB>
 void
 FabArray<FAB>::FillBoundary (const Periodicity& period, bool cross)
 {
+    // Add MPI barrier in order to accurately measure FillBoundary
+    ParallelDescriptor::Barrier();
     BL_PROFILE("FabArray::FillBoundary()");
     if ( n_grow.max() > 0 ) {
 	FillBoundary_nowait(0, nComp(), n_grow, period, cross);
@@ -1804,6 +1808,8 @@ template <class FAB>
 void
 FabArray<FAB>::FillBoundary (int scomp, int ncomp, bool cross)
 {
+    // Add MPI barrier in order to accurately measure FillBoundary
+    ParallelDescriptor::Barrier();
     BL_PROFILE("FabArray::FillBoundary()");
     if ( n_grow.max() > 0 ) {
 	FillBoundary_nowait(scomp, ncomp, n_grow, Periodicity::NonPeriodic(), cross);
@@ -1815,6 +1821,8 @@ template <class FAB>
 void
 FabArray<FAB>::FillBoundary (int scomp, int ncomp, const Periodicity& period, bool cross)
 {
+    // Add MPI barrier in order to accurately measure FillBoundary
+    ParallelDescriptor::Barrier();
     BL_PROFILE("FabArray::FillBoundary()");
     if ( n_grow.max() > 0 ) {
 	FillBoundary_nowait(scomp, ncomp, n_grow, period, cross);
@@ -1827,6 +1835,8 @@ void
 FabArray<FAB>::FillBoundary (int scomp, int ncomp, const IntVect& nghost,
                              const Periodicity& period, bool cross)
 {
+    // Add MPI barrier in order to accurately measure FillBoundary
+    ParallelDescriptor::Barrier();
     BL_PROFILE("FabArray::FillBoundary()");
     AMREX_ALWAYS_ASSERT_WITH_MESSAGE(nghost.allLE(nGrowVect()),
                                      "FillBoundary: asked to fill more ghost cells than we have");
